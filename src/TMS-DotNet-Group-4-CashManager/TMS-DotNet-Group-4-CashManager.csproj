@@ -6,4 +6,8 @@
     <RootNamespace>TMS_DotNet_Group_4_CashManager</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Bogus" Version="33.1.1" />
+  </ItemGroup>
+
 </Project>

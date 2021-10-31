@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Threading;
+using TMS_DotNet_Group_4_CashManager.Models;
 
 namespace TMS_DotNet_Group_4_CashManager
 {
@@ -6,7 +8,9 @@ namespace TMS_DotNet_Group_4_CashManager
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var shop = new Shop();
+
+            shop.Start();
         }
     }
 }
