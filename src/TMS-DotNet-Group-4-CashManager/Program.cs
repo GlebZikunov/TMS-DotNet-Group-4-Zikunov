@@ -11,6 +11,7 @@ namespace TMS_DotNet_Group_4_CashManager
             var shop = new Shop();
 
             shop.Start();
+            Console.ReadKey();
         }
     }
 }
