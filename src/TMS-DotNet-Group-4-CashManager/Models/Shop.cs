@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading;
 
 namespace TMS_DotNet_Group_4_CashManager.Models
 {
@@ -7,21 +6,47 @@ namespace TMS_DotNet_Group_4_CashManager.Models
     {
         public void Start()
         {
-            Console.Write("Cash count: ");
-            var cashCount = int.Parse(Console.ReadLine());
+            var stopword = false;
 
-            var commonIncome = 0M;
-
-            for (int i = 1; i <= cashCount; i++)
+            while (!stopword)
             {
-                Console.WriteLine($"{new string('-', 20)}");
-                var cash = new Cash(i);
-                Console.WriteLine($"{new string('-', 20)}");
-                Console.WriteLine();
+                var shift = new Shift();
 
-                commonIncome += cash.Income;
+                shift.InputTime();
+                shift.Start();
+
+                //Console.Write("Cash count: ");
+                var cashCount = 5;//int.Parse(Console.ReadLine());
+
+                var commonIncome = 0M;
+
+                for (int i = 1; i <= cashCount; i++)
+                {
+                    Console.WriteLine($"{new string('-', 20)}");
+                    var cash = new Cash(i);
+                    Console.WriteLine($"{new string('-', 20)}");
+                    Console.WriteLine();
+
+                    commonIncome += cash.Income;
+
+                    if (DateTime.Now.ToString("T") == Shift.GetEndTime().ToString("T"))
+                    {
+                        break;
+                    }
+                }
+                
+                Console.WriteLine($"Total income: {commonIncome}$");
+                shift.End();
+
+                stopword = Shift.StopInput();
+                Console.Clear();
             }
-            Console.WriteLine($"Total income: {commonIncome}$");
+        }
+
+        private static void TimerCallback(Object o)
+        {
+            // Display the date/time when this method got called.
+            Console.WriteLine("In TimerCallback: " + DateTime.Now);
         }
     }
 }

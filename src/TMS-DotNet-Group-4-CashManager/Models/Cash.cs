@@ -70,11 +70,17 @@ namespace TMS_DotNet_Group_4_CashManager.Models
                 /// Итоговая цена, от основной суммы отнимаем скидку.
                 /// </summary>
                 var totalPrice = incomeByCustomer - discountIncome;
-                Console.WriteLine($"Cash number: {cashInfo.Number}|| " +
-                                  $"Price - {incomeByCustomer}$|| " +
-                                  $"Discount - {discount}% - {discountIncome}$|| " +
-                                  $"Total - {totalPrice}");
+                Console.WriteLine($"Cash number: {cashInfo.Number}|| " 
+                    + $"Price - {incomeByCustomer}$|| " 
+                    + $"Discount - {discount}% - {discountIncome}$|| "
+                    + $"Total - {totalPrice}");
+
                 incomeByCash += totalPrice;
+
+                if (DateTime.Now.ToString("T") == Shift.GetEndTime().ToString("T"))
+                {
+                    break;
+                }
             }
 
             return incomeByCash;
