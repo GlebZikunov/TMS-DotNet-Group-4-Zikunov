@@ -5,6 +5,6 @@ namespace TMS_DotNet_Group_4_CashManager.Models
 {
     public class Cart
     {
-        public IEnumerable<Product> Products { get; set; } = Helper.GetRandomProducts();
+      public Inventory inventory = new Inventory();
     }
 }

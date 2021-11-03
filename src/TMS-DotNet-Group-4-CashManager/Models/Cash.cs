@@ -35,7 +35,7 @@ namespace TMS_DotNet_Group_4_CashManager.Models
                 /// Скидка клиенту.
                 /// </summary>
                 decimal discount = customer.discountBalance; // Discount to customer
-                customer.Cart.Products = customer.Cart.Products.OrderByDescending(product => product.Price);
+                /*customer.Cart.Products = customer.Cart.Products.OrderByDescending(product => product.Price);
 
                 while (true)
                 {
@@ -46,9 +46,9 @@ namespace TMS_DotNet_Group_4_CashManager.Models
                     }
 
                     customer.Cart.Products = customer.Cart.Products.Skip(1);
-                }
+                }*/
 
-                foreach (var product in customer.Cart.Products)
+                foreach (var product in customer.Cart.inventory.Products)
                 {
                     incomeByCustomer += product.Price;
                 }
