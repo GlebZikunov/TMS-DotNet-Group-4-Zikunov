@@ -5,7 +5,7 @@ using TMS_DotNet_Group_4_CashManager.Models;
 
 namespace TMS_DotNet_Group_4_CashManager.Services
 {
-    public class Helper
+    public class Helper : DataSet
     {
         public static int GetRandomValue(int minValue, int maxValue)
         {
@@ -13,16 +13,39 @@ namespace TMS_DotNet_Group_4_CashManager.Services
             return random.Next(minValue, maxValue);
         }
 
-        public static IEnumerable<Product> GetRandomProducts()
+        /// <summary>
+        /// Get Products
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Product> GetRandomProducts()
         {
+            string[] inventories = { "bag", "cart", "basket" };
+            string inventory = this.Random.ArrayElement(inventories);
+
+            int maxRandomValue = default;
+            switch (inventory)
+            {
+                case "bag":
+                    maxRandomValue = 1;
+                    break;
+
+                case "cart":
+                    maxRandomValue = 5;
+                    break;
+
+                case "basket":
+                    maxRandomValue = 10;
+                    break;
+            }
             var random = new Random();
-            var fruit = new[] { "apple", "banana", "orange", "strawberry", "kiwi" };
+            var product = new[] { "fruits", "meat", "vegetables", "milk", "meat" };
 
             var productFaker = new Faker<Product>()
-               .RuleFor(product => product.Name, faker => faker.PickRandom(fruit))
+               .RuleFor(product => product.Name, faker => faker.PickRandom(product))
                .RuleFor(product => product.Price, faker => faker.Random.Number(10, 50));
 
-            var result = productFaker.Generate(random.Next(1, 20));
+            var result = productFaker.Generate(random.Next(1, maxRandomValue));
+
             return result;
         }
 

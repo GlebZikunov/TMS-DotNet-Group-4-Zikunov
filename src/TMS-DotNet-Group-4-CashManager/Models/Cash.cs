@@ -31,7 +31,11 @@ namespace TMS_DotNet_Group_4_CashManager.Models
             foreach (var customer in cashInfo.Customers)
             {
                 var incomeByCustomer = 0M;
-                customer.Cart.Products = customer.Cart.Products.OrderByDescending(product => product.Price);
+                /// <summary>
+                /// Скидка клиенту.
+                /// </summary>
+                decimal discount = customer.discountBalance; // Discount to customer
+                /*customer.Cart.Products = customer.Cart.Products.OrderByDescending(product => product.Price);
 
                 while (true)
                 {
@@ -42,18 +46,35 @@ namespace TMS_DotNet_Group_4_CashManager.Models
                     }
 
                     customer.Cart.Products = customer.Cart.Products.Skip(1);
-                }
+                }*/
 
-                foreach (var product in customer.Cart.Products)
+                foreach (var product in customer.Cart.inventory.Products)
                 {
                     incomeByCustomer += product.Price;
                 }
 
                 var task = Task.Delay(cashInfo.Speed);
                 task.Wait();
-
-                Console.WriteLine($"Cash number: {cashInfo.Number} - {incomeByCustomer}$");
-                incomeByCash += incomeByCustomer;
+                /// <summary>
+                /// Скидка равна 0, если сумма равна 0.
+                /// </summary>
+                if (incomeByCustomer <= 0)
+                {
+                    discount = 0;
+                }
+                /// <summary>
+                /// Считаем скидку от основной суммы.
+                /// </summary>
+                var discountIncome = (discount * incomeByCustomer) / 100;
+                /// <summary>
+                /// Итоговая цена, от основной суммы отнимаем скидку.
+                /// </summary>
+                var totalPrice = incomeByCustomer - discountIncome;
+                Console.WriteLine($"Cash number: {cashInfo.Number}|| " +
+                                  $"Price - {incomeByCustomer}$|| " +
+                                  $"Discount - {discount}% - {discountIncome}$|| " +
+                                  $"Total - {totalPrice}");
+                incomeByCash += totalPrice;
             }
 
             return incomeByCash;
