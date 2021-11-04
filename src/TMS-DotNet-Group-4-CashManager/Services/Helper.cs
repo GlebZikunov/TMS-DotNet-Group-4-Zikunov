@@ -13,10 +13,6 @@ namespace TMS_DotNet_Group_4_CashManager.Services
             return random.Next(minValue, maxValue);
         }
 
-        /// <summary>
-        /// Get Products
-        /// </summary>
-        /// <returns></returns>
         public IEnumerable<Product> GetRandomProducts()
         {
             string[] inventories = { "bag", "cart", "basket" };

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Threading.Tasks;
 using TMS_DotNet_Group_4_CashManager.Services;
 
@@ -31,23 +30,9 @@ namespace TMS_DotNet_Group_4_CashManager.Models
             foreach (var customer in cashInfo.Customers)
             {
                 var incomeByCustomer = 0M;
-                /// <summary>
-                /// Скидка клиенту.
-                /// </summary>
-                decimal discount = customer.discountBalance; // Discount to customer
-                /*customer.Cart.Products = customer.Cart.Products.OrderByDescending(product => product.Price);
 
-                while (true)
-                {
-                    var cartSum = customer.Cart.Products.Sum(product => product.Price);
-                    if (customer.Balance >= cartSum)
-                    {
-                        break;
-                    }
-
-                    customer.Cart.Products = customer.Cart.Products.Skip(1);
-                }*/
-
+                decimal discount = customer.discountBalance;
+                
                 foreach (var product in customer.Cart.inventory.Products)
                 {
                     incomeByCustomer += product.Price;
@@ -55,22 +40,16 @@ namespace TMS_DotNet_Group_4_CashManager.Models
 
                 var task = Task.Delay(cashInfo.Speed);
                 task.Wait();
-                /// <summary>
-                /// Скидка равна 0, если сумма равна 0.
-                /// </summary>
+                
                 if (incomeByCustomer <= 0)
                 {
                     discount = 0;
                 }
-                /// <summary>
-                /// Считаем скидку от основной суммы.
-                /// </summary>
+              
                 var discountIncome = (discount * incomeByCustomer) / 100;
-                /// <summary>
-                /// Итоговая цена, от основной суммы отнимаем скидку.
-                /// </summary>
+                
                 var totalPrice = incomeByCustomer - discountIncome;
-                Console.WriteLine($"Cash number: {cashInfo.Number}|| " 
+                Console.WriteLine($"Cash number: {cashInfo.Number}|| "
                     + $"Price - {incomeByCustomer}$|| " 
                     + $"Discount - {discount}% - {discountIncome}$|| "
                     + $"Total - {totalPrice}");

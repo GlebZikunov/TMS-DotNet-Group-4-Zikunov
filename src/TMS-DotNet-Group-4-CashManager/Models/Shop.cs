@@ -15,9 +15,7 @@ namespace TMS_DotNet_Group_4_CashManager.Models
                 shift.InputTime();
                 shift.Start();
 
-                //Console.Write("Cash count: ");
-                var cashCount = 5;//int.Parse(Console.ReadLine());
-
+                var cashCount = 5;
                 var commonIncome = 0M;
 
                 for (int i = 1; i <= cashCount; i++)
@@ -41,12 +39,6 @@ namespace TMS_DotNet_Group_4_CashManager.Models
                 stopword = Shift.StopInput();
                 Console.Clear();
             }
-        }
-
-        private static void TimerCallback(Object o)
-        {
-            // Display the date/time when this method got called.
-            Console.WriteLine("In TimerCallback: " + DateTime.Now);
         }
     }
 }

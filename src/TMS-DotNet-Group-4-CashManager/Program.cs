@@ -1,5 +1,4 @@
-﻿using System;
-using TMS_DotNet_Group_4_CashManager.Models;
+﻿using TMS_DotNet_Group_4_CashManager.Models;
 
 namespace TMS_DotNet_Group_4_CashManager
 {
