@@ -45,7 +45,7 @@ namespace TMS_DotNet_Group_4_CashManager.Models
                 {
                     discount = 0;
                 }
-              
+
                 var discountIncome = (discount * incomeByCustomer) / 100;
                 
                 var totalPrice = incomeByCustomer - discountIncome;

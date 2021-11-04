@@ -16,6 +16,7 @@ namespace TMS_DotNet_Group_4_CashManager.Models
                 shift.Start();
 
                 var cashCount = 5;
+
                 var commonIncome = 0M;
 
                 for (int i = 1; i <= cashCount; i++)
