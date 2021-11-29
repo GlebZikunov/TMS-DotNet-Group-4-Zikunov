@@ -30,9 +30,9 @@ namespace TMS_DotNet_Group_4_CashManager.Models
             foreach (var customer in cashInfo.Customers)
             {
                 var incomeByCustomer = 0M;
-                
-                decimal discount = customer.discountBalance;
 
+                decimal discount = customer.discountBalance;
+                
                 foreach (var product in customer.Cart.inventory.Products)
                 {
                     incomeByCustomer += product.Price;
@@ -45,11 +45,11 @@ namespace TMS_DotNet_Group_4_CashManager.Models
                 {
                     discount = 0;
                 }
-                
+
                 var discountIncome = (discount * incomeByCustomer) / 100;
                 
                 var totalPrice = incomeByCustomer - discountIncome;
-                Console.WriteLine($"Cash number: {cashInfo.Number}|| " 
+                Console.WriteLine($"Cash number: {cashInfo.Number}|| "
                     + $"Price - {incomeByCustomer}$|| " 
                     + $"Discount - {discount}% - {discountIncome}$|| "
                     + $"Total - {totalPrice}");
